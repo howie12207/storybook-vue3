@@ -14,6 +14,10 @@ const props = defineProps({
         type: String,
         default: 'currentColor'
     },
+    bgColor: {
+        type: String,
+        default: 'transparent'
+    },
     lineWidth: {
         type: Number,
         default: 2
@@ -21,11 +25,12 @@ const props = defineProps({
 });
 
 const style = computed(() => {
-    const { mainColor, borderColor, size, lineWidth } = props;
+    const { mainColor, borderColor, bgColor, size, lineWidth } = props;
     const pointSize = props.size / 6;
     return {
         '--moreColor': mainColor,
         '--moreBorderColor': borderColor,
+        '--moreBgColor': bgColor,
         '--moreSize': `${size}px`,
         '--moreLineWidth': `${lineWidth}px`,
         '--morePointSize': `${pointSize}px`,
@@ -54,6 +59,7 @@ const style = computed(() => {
     height: var(--moreSize);
     border: var(--moreLineWidth) solid var(--moreBorderColor);
     border-radius: var(--moreSize);
+    background-color: var(--moreBgColor);
 }
 .icon_more::before {
     content: '';

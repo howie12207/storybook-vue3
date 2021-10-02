@@ -1,8 +1,8 @@
-import IconMore from './IconMore.vue';
+import IconWarning from './IconWarning.vue';
 
 export default {
-    title: 'Howie/Icon/More',
-    component: IconMore,
+    title: 'Howie/Icon/Warning',
+    component: IconWarning,
     argTypes: {
         size: {
             description: 'The icon width & height.',
@@ -52,36 +52,22 @@ export default {
                     summary: 'transparent'
                 }
             }
-        },
-        lineWidth: {
-            description: 'The symbol lineWidth.',
-            type: { name: 'number' },
-            table: {
-                type: {
-                    summary: 'number',
-                    detail: 'px'
-                },
-                defaultValue: {
-                    summary: 2
-                }
-            }
         }
     }
 };
 
-const TemplateMore = args => ({
-    components: { IconMore },
+const Template = args => ({
+    components: { IconWarning },
     setup() {
         return { args };
     },
-    template: '<IconMore v-bind="args" />'
+    template: '<IconWarning v-bind="args" />'
 });
 
-export const More = TemplateMore.bind({});
-More.args = {
+export const Warning = Template.bind({});
+Warning.args = {
     size: 32,
     mainColor: 'currentColor',
     borderColor: 'currentColor',
-    bgColor: 'transparent',
-    lineWidth: 2
+    bgColor: 'transparent'
 };
