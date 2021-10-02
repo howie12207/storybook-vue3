@@ -30,10 +30,6 @@ defineProps({
 });
 const emit = defineEmits(['close']);
 
-const confirm = close => {
-    console.log('確認');
-    close();
-};
 const closeEmit = () => {
     emit('close');
 };

@@ -39,10 +39,14 @@ const style = computed(() => {
 </template>
 
 <style scoped>
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 .icon_add {
     display: inline-block;
     position: relative;
-    box-sizing: border-box;
     width: var(--addSize);
     height: var(--addSize);
     border: 2px solid var(--addBorderColor);
@@ -53,7 +57,6 @@ const style = computed(() => {
 .icon_add::before {
     content: '';
     position: absolute;
-    box-sizing: border-box;
     width: calc(var(--addSize) / 2);
     height: 2px;
     background: var(--addColor);

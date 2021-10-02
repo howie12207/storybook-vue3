@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 
-const prop = defineProps({
+const props = defineProps({
     duration: {
         type: Number,
         default: 300
@@ -37,7 +37,7 @@ onMounted(() => {
 });
 
 const closeHandle = e => {
-    if (prop.closeOut) close();
+    if (props.closeOut) close();
 };
 const show = ref(false);
 const close = () => {
@@ -45,12 +45,12 @@ const close = () => {
     setTimeout(() => {
         emit('close');
         document.body.style.overflow = 'initial';
-    }, prop.duration);
+    }, props.duration);
 };
 
 const style = computed(() => {
     return {
-        '--popupDuration': `${prop.duration / 1000}s`
+        '--popupDuration': `${props.duration / 1000}s`
     };
 });
 </script>
