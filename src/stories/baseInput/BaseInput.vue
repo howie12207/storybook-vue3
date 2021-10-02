@@ -123,6 +123,11 @@ const clear = () => {
 </template>
 
 <style scoped>
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 .input_section {
     --textColor: #374151;
     --borderColor: #374151;
