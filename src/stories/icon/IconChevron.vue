@@ -89,9 +89,8 @@ const style = computed(() => {
 .icon_chevron.pointer {
     cursor: pointer;
     transition: 0.3s;
-    opacity: 0.7;
 }
 .icon_chevron.pointer:hover {
-    opacity: 1;
+    opacity: 0.7;
 }
 </style>

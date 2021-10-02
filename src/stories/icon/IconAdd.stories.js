@@ -1,8 +1,8 @@
-import IconChevron from './IconChevron.vue';
+import IconAdd from './IconAdd.vue';
 
 export default {
-    title: 'Howie/Icon/Chevron',
-    component: IconChevron,
+    title: 'Howie/Icon/Add',
+    component: IconAdd,
     argTypes: {
         size: {
             description: 'The icon width & height.',
@@ -53,33 +53,6 @@ export default {
                 }
             }
         },
-        lineWidth: {
-            description: 'The symbol lineWidth.',
-            type: { name: 'number' },
-            table: {
-                type: {
-                    summary: 'number',
-                    detail: 'px'
-                },
-                defaultValue: {
-                    summary: 2
-                }
-            }
-        },
-        direction: {
-            description: 'The chevron direction.',
-            type: { name: 'string' },
-            control: { type: 'select' },
-            options: ['left', 'top', 'right', 'bottom'],
-            table: {
-                type: {
-                    summary: 'left | top | right | bottom'
-                },
-                defaultValue: {
-                    summary: 'left'
-                }
-            }
-        },
         pointer: {
             description: 'Define whether hover effect or not.',
             type: { name: 'boolean' },
@@ -95,21 +68,19 @@ export default {
     }
 };
 
-const TemplateChevron = args => ({
-    components: { IconChevron },
+const TemplateAdd = args => ({
+    components: { IconAdd },
     setup() {
         return { args };
     },
-    template: '<IconChevron v-bind="args" />'
+    template: '<IconAdd v-bind="args" />'
 });
 
-export const Chevron = TemplateChevron.bind({});
-Chevron.args = {
+export const Add = TemplateAdd.bind({});
+Add.args = {
     size: 24,
     mainColor: 'currentColor',
     borderColor: 'transparent',
     bgColor: 'transparent',
-    direction: 'left',
-    lineWidth: 2,
     pointer: false
 };

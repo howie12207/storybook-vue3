@@ -37,7 +37,7 @@ export default {
                     summary: 'string'
                 },
                 defaultValue: {
-                    summary: 'currentColor'
+                    summary: 'transparent'
                 }
             }
         },
@@ -49,7 +49,7 @@ export default {
                     summary: 'string'
                 },
                 defaultValue: {
-                    summary: 'currentColor'
+                    summary: 'transparent'
                 }
             }
         },
