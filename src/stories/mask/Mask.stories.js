@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import Mask from './Mask.vue';
 import PopupCommon from './PopupCommon.vue';
 import Rightbar from './Rightbar.vue';
+import BaseButton from '../baseButton/BaseButton.vue';
 
 export default {
     title: 'Howie/Mask',
@@ -94,7 +95,7 @@ export default {
 };
 
 const TemplateDefault = args => ({
-    components: { Mask },
+    components: { Mask, BaseButton },
     setup() {
         const popupOpen = ref(undefined);
         const popup = target => {
@@ -102,12 +103,12 @@ const TemplateDefault = args => ({
         };
         return { args, popupOpen, popup };
     },
-    template: `<button @click="popup('common')">開啟遮罩層</button>
+    template: `<BaseButton @click="popup('common')">開啟遮罩層</BaseButton>
                <Mask v-bind="args" v-if="popupOpen === 'common'" @close="popup"/>`
 });
 
 const TemplatePopup = args => ({
-    components: { PopupCommon },
+    components: { PopupCommon, BaseButton },
     setup() {
         const popupOpen = ref(undefined);
         const popup = target => {
@@ -115,12 +116,12 @@ const TemplatePopup = args => ({
         };
         return { args, popupOpen, popup };
     },
-    template: `<button @click="popup('create')">開啟彈窗</button>
+    template: `<BaseButton @click="popup('create')">開啟彈窗</BaseButton>
                <PopupCommon v-bind="args" v-if="popupOpen === 'create'" @close="popup"/>`
 });
 
 const TemplateRightbar = args => ({
-    components: { Rightbar },
+    components: { Rightbar, BaseButton },
     setup() {
         const popupOpen = ref(undefined);
         const popup = target => {
@@ -128,7 +129,7 @@ const TemplateRightbar = args => ({
         };
         return { args, popupOpen, popup };
     },
-    template: `<button @click="popup('rightbar')">開啟右側欄</button>
+    template: `<BaseButton @click="popup('rightbar')">開啟右側欄</BaseButton>
                <Rightbar v-bind="args" v-if="popupOpen === 'rightbar'" @close="popup"/>`
 });
 
