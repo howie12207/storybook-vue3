@@ -1,8 +1,8 @@
-import IconX from './IconX.vue';
+import IconCheck from './IconCheck.vue';
 
 export default {
-    title: 'Howie/Icon/X',
-    component: IconX,
+    title: 'Howie/Icon/Check',
+    component: IconCheck,
     argTypes: {
         size: {
             description: 'The icon width & height.',
@@ -52,35 +52,22 @@ export default {
                     summary: 'transparent'
                 }
             }
-        },
-        pointer: {
-            description: 'Define whether hover effect or not.',
-            type: { name: 'boolean' },
-            table: {
-                type: {
-                    summary: 'boolean'
-                },
-                defaultValue: {
-                    summary: false
-                }
-            }
         }
     }
 };
 
-const TemplateX = args => ({
-    components: { IconX },
+const Template = args => ({
+    components: { IconCheck },
     setup() {
         return { args };
     },
-    template: '<IconX v-bind="args" />'
+    template: '<IconCheck v-bind="args" />'
 });
 
-export const X = TemplateX.bind({});
-X.args = {
-    size: 24,
-    mainColor: 'red',
+export const Check = Template.bind({});
+Check.args = {
+    size: 48,
+    mainColor: 'green',
     borderColor: 'transparent',
-    bgColor: 'transparent',
-    pointer: false
+    bgColor: 'transparent'
 };
