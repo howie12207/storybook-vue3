@@ -39,6 +39,11 @@ const style = computed(() => {
 </template>
 
 <style scoped>
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 .icon_x {
     display: inline-block;
     position: relative;
