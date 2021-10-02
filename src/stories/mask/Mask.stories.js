@@ -15,7 +15,8 @@ export default {
                     summary: 'number'
                 },
                 defaultValue: {
-                    summary: 300
+                    summary: 300,
+                    detail: 'px'
                 }
             }
         },
