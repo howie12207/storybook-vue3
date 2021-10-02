@@ -55,8 +55,7 @@ const style = computed(() => {
     box-sizing: border-box;
 }
 .base_button {
-    display: flex;
-    align-items: center;
+    display: inline-block;
     position: relative;
     border: 1px solid var(--buttonMainColor);
     background-color: #fff;
