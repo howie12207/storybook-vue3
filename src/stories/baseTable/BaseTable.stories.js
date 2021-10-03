@@ -8,9 +8,12 @@ export default {
     argTypes: {
         listTitles: {
             description: 'Provide table head.',
+            type: { name: 'array' },
             table: {
                 type: {
-                    detail: `label & key are required.
+                    summary: 'array',
+                    detail: `{label: '', key: '', type: ''}
+label & key are required.
 1. label for table head.
 2. key correspond to list data.
 3. type to format value.
@@ -23,10 +26,64 @@ export default {
             }
         },
         listData: {
-            description: 'Provide list data.'
+            description: 'Provide list data.',
+            type: { name: 'array' },
+            table: {
+                type: {
+                    summary: 'array'
+                },
+                defaultValue: {
+                    summary: '[]'
+                }
+            }
+        },
+        loading: {
+            description: 'Loading status.',
+            type: { name: 'boolean' },
+            table: {
+                type: {
+                    summary: 'boolean'
+                },
+                defaultValue: {
+                    summary: false
+                }
+            }
         },
         fixedHead: {
-            description: 'Fixed head and set table height.'
+            description: 'Fixed head and set table height.',
+            type: { name: 'boolean' },
+            table: {
+                type: {
+                    summary: 'boolean'
+                },
+                defaultValue: {
+                    summary: false
+                }
+            }
+        },
+        maxHeight: {
+            description: 'Limit table max-height.',
+            type: { name: 'string' },
+            table: {
+                type: {
+                    summary: 'string'
+                },
+                defaultValue: {
+                    summary: 'initial'
+                }
+            }
+        },
+        emptyText: {
+            description: 'The text displaying when no data.',
+            type: { name: 'string' },
+            table: {
+                type: {
+                    summary: 'string'
+                },
+                defaultValue: {
+                    summary: '暫無資料'
+                }
+            }
         },
         default: {
             description: 'Custom content.',
@@ -113,7 +170,8 @@ Common.args = {
     ],
     loading: false,
     fixedHead: false,
-    maxHeight: 'initial'
+    maxHeight: 'initial',
+    emptyText: '暫無資料'
 };
 
 export const Loading = TemplateLoading.bind({});

@@ -61,7 +61,9 @@ const style = computed(() => {
                 </thead>
                 <tbody v-if="loading">
                     <tr class="loading">
-                        <td :colspan="listTitles.length"><IconLoading /></td>
+                        <td :colspan="listTitles.length">
+                            <IconLoading mainColor="rgb(191, 219, 254)" />
+                        </td>
                     </tr>
                 </tbody>
                 <tbody v-else-if="listData && listData.length > 0">
