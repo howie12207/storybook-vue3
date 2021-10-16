@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, nextTick, defineProps, defineEmits } from 'vue';
+import { ref, computed, nextTick, onMounted } from 'vue';
 import IconX from './IconX.vue';
 import { typeRules, lengthRules, errorText } from './inputVerify.js';
 const props = defineProps({
@@ -38,14 +38,37 @@ const props = defineProps({
     },
     clearBtn: {
         type: Boolean,
-        default: true
+        default: false
+    },
+    disabled: {
+        type: Boolean,
+        default: false
     },
     multi: {
         type: Boolean,
         default: false
+    },
+    focus: {
+        type: Boolean,
+        default: false
+    },
+    errReserve: {
+        type: Boolean,
+        default: true
+    },
+    theme: {
+        type: Number,
+        default: 1,
+        validator: value => [1, 2].includes(value)
     }
 });
 const emit = defineEmits(['update:inputValue', 'update:isValid', 'onBlur', 'onKeyup']);
+import(`./theme${props.theme}.css`);
+
+const inputRef = ref(null);
+onMounted(() => {
+    if (props.focus) inputRef.value.focus();
+});
 const blurInput = ref(false);
 const clearBtnShow = ref(false);
 const valueSync = computed({
@@ -57,9 +80,9 @@ const onBlur = value => {
     emit('onBlur', value);
     nextTick(() => validate(value));
 };
-const onKeyup = value => {
+const onKeyup = (value, e) => {
     clearBtnShow.value = value.length > 0;
-    emit('onKeyup', value);
+    emit('onKeyup', e);
     nextTick(() => validate(value));
 };
 const onKeydown = e => {
@@ -72,7 +95,6 @@ const onKeydown = e => {
     if (code[limit].includes(e.keyCode)) e.preventDefault();
 };
 const validate = value => {
-    if (!blurInput.value) return;
     let isValid = true;
     if (Object.keys(props.rules).length > 0) {
         const typeLimit = typeRules(value, props.rules.limit);
@@ -90,7 +112,7 @@ const clear = () => {
 </script>
 
 <template>
-    <section :class="['input_section', !isValid && blurInput && 'is_error', !multi && 'flex']">
+    <section :class="['input_section', !isValid && blurInput && 'is_error', !multi && 'not_multi']">
         <div class="left">
             <slot name="label">
                 <label :class="['label', valueSync !== '' && 'not_empty']" :for="id">{{
@@ -102,18 +124,20 @@ const clear = () => {
         <div class="right">
             <div class="input_block">
                 <input
+                    ref="inputRef"
                     :id="id"
                     v-model="valueSync"
                     class="input"
                     :type="type"
                     :placeholder="placeholder"
+                    :disabled="disabled"
                     @blur="onBlur(inputValue)"
-                    @keyup="onKeyup(inputValue)"
+                    @keyup="onKeyup(inputValue, $event)"
                     @keydown="onKeydown"
                 />
                 <IconX v-if="clearBtn && clearBtnShow" class="icon_x" pointer @click="clear" />
             </div>
-            <div class="error_box">
+            <div :class="['error_box', errReserve && 'reserve']">
                 <div v-if="!isValid && blurInput" class="error_text">
                     {{ errorText(props) }}
                 </div>
@@ -121,83 +145,3 @@ const clear = () => {
         </div>
     </section>
 </template>
-
-<style scoped>
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-.input_section {
-    --textColor: #374151;
-    --borderColor: #374151;
-    --activeBorderColor: #2390fa;
-    --errorColor: #fd393e;
-}
-.input_block {
-    position: relative;
-}
-.input_block:focus-within::after {
-    width: 100%;
-    left: 0;
-}
-.input {
-    display: block;
-    position: relative;
-    width: 100%;
-    outline: none;
-    padding: 0 24px 0 8px;
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px var(--borderColor) solid;
-}
-.input_block::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    left: 50%;
-    background-color: var(--activeBorderColor);
-    transition: 0.5s;
-}
-.label {
-    font-weight: 600;
-    color: var(--textColor);
-}
-.is_error .label {
-    color: var(--errorColor);
-}
-.is_error .input {
-    border-color: var(--errorColor);
-}
-.is_error .input_block::after {
-    background-color: var(--errorColor);
-}
-.is_error .icon_x {
-    color: var(--errorColor);
-}
-
-.error_box {
-    font-size: 14px;
-    text-align: left;
-    color: var(--errorColor);
-}
-.icon_x {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    color: var(--activeBorderColor);
-}
-
-.flex {
-    display: flex;
-}
-.flex .label {
-    flex-shrink: 0;
-    margin-right: 8px;
-}
-.flex .right {
-    flex-grow: 1;
-}
-</style>

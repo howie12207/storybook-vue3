@@ -6,6 +6,7 @@ import IconLoading from './IconLoading.vue';
 const props = defineProps({
     listTitles: {
         type: Array,
+        default: () => [],
         required: true
     },
     listData: {

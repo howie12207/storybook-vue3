@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, onUnmounted } from 'vue';
 
 const props = defineProps({
     duration: {
@@ -34,6 +34,11 @@ const emit = defineEmits(['close']);
 onMounted(() => {
     show.value = true;
     document.body.style.overflow = 'hidden';
+});
+
+onUnmounted(() => {
+    show.value = false;
+    document.body.style.overflow = 'initial';
 });
 
 const closeHandle = e => {

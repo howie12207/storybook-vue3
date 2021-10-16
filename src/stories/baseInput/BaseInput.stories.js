@@ -95,6 +95,18 @@ export default {
                 }
             }
         },
+        disabled: {
+            description: 'Input disabled',
+            type: { name: 'boolean' },
+            table: {
+                defaultValue: {
+                    summary: false
+                },
+                type: {
+                    summary: 'boolean'
+                }
+            }
+        },
         multi: {
             description: 'Mutiple lines for label and input',
             type: { name: 'boolean' },
@@ -128,6 +140,44 @@ export default {
                 },
                 type: {
                     summary: 'string'
+                }
+            }
+        },
+        focus: {
+            description: 'Focus on the element',
+            type: { name: 'boolean' },
+            table: {
+                defaultValue: {
+                    summary: false
+                },
+                type: {
+                    summary: 'boolean'
+                }
+            }
+        },
+        errReserve: {
+            description: 'Reserve error block space.',
+            type: { name: 'boolean' },
+            table: {
+                defaultValue: {
+                    summary: true
+                },
+                type: {
+                    summary: 'boolean'
+                }
+            }
+        },
+        theme: {
+            description: 'Style of baseInput',
+            type: { name: 'number' },
+            control: { type: 'select' },
+            options: [1, 2],
+            table: {
+                defaultValue: {
+                    summary: 1
+                },
+                type: {
+                    summary: 'number'
                 }
             }
         }
@@ -175,7 +225,11 @@ Common.args = {
     type: 'text',
     rules: {},
     multi: false,
-    clearBtn: false
+    clearBtn: false,
+    disabled: false,
+    focus: false,
+    errReserve: true,
+    theme: 1
 };
 
 export const IsRequired = Template.bind({});

@@ -21,12 +21,17 @@ const props = defineProps({
     loading: {
         type: Boolean,
         default: false
+    },
+    type: {
+        type: String,
+        default: 'button',
+        validator: value => ['button', 'submit', 'reset'].includes(value)
     }
 });
 const emit = defineEmits(['click']);
 
-const onClick = () => {
-    if (!props.disabled) emit('click');
+const onClick = e => {
+    if (!props.disabled) emit('click', e);
 };
 
 const style = computed(() => {
@@ -38,7 +43,12 @@ const style = computed(() => {
 </script>
 
 <template>
-    <button :style="style" :class="['base_button', { disabled }, { loading }]" @click="onClick">
+    <button
+        :style="style"
+        :type="type"
+        :class="['base_button', { disabled }, { loading }]"
+        @click="onClick"
+    >
         <IconLoading
             v-if="loading"
             :mainColor="loadingColor"
@@ -84,5 +94,6 @@ const style = computed(() => {
 .icon {
     position: absolute;
     left: 4px;
+    top: 8px;
 }
 </style>

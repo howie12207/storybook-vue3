@@ -1,0 +1,73 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+.input_section {
+    --textColor: #111827;
+    --borderColor: #e5e7eb;
+    --activeColor: #2390fa;
+    --errorColor: #fd393e;
+    --bgColor: #fff;
+
+    position: relative;
+}
+.label {
+    position: absolute;
+    z-index: 1000;
+    top: 8px;
+    left: 12px;
+    padding: 0 4px;
+    background-color: var(--bgColor);
+    color: var(--textColor);
+    transition: 0.3s;
+}
+.input_block {
+    border: 1px solid var(--borderColor);
+    border-radius: 4px;
+    transition: 0.3s;
+}
+.input {
+    display: block;
+    width: 100%;
+    position: relative;
+    padding: 8px 24px 8px 16px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.input_section:focus-within .input_block {
+    border-color: var(--activeColor);
+}
+.input_section:focus-within .label {
+    color: var(--activeColor);
+}
+.input_section:focus-within .label,
+.not_empty.label {
+    transform: scale(0.8);
+    top: -12px;
+}
+
+.input_section.is_error .input_block {
+    border-color: var(--errorColor);
+}
+.input_section.is_error:focus-within .label,
+.is_error .not_empty.label {
+    color: var(--errorColor);
+}
+
+.error_box {
+    font-size: 12px;
+    color: var(--errorColor);
+}
+.error_box.reserve {
+    min-height: 20px;
+}
+
+.icon_x {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    color: var(--activeColor);
+}

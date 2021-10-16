@@ -65,6 +65,20 @@ export default {
                     summary: 'boolean'
                 }
             }
+        },
+        type: {
+            description: 'Button type',
+            type: { name: 'string' },
+            control: { type: 'select' },
+            options: ['button', 'submit', 'reset'],
+            table: {
+                defaultValue: {
+                    summary: 'text'
+                },
+                type: {
+                    summary: 'string'
+                }
+            }
         }
     }
 };
